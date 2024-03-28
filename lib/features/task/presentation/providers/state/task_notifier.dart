@@ -25,13 +25,13 @@ class TaskNotifier extends StateNotifier<TaskState> {
   Future<void> fetchTask() async {
     if (isFetching) return;
     if (state.state != TaskConcreteState.fetchedAllProducts) {
-      await Future.delayed(const Duration(milliseconds: 500));
       state = state.copyWith(
         state: state.page > 0
             ? TaskConcreteState.fetchingMore
             : TaskConcreteState.loading,
         isLoading: true,
       );
+      await Future.delayed(const Duration(milliseconds: 500));
 
       final response = await taskRepository.getTasks(
         offset: state.page,

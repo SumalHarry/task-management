@@ -7,9 +7,11 @@ import 'package:flutter_project/features/task/presentation/widgets/task_list_ite
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TaskList extends ConsumerStatefulWidget {
-  const TaskList({super.key, required this.taskStatus});
+  const TaskList(
+      {super.key, required this.taskStatus, this.fetchingScrollOffset = 300});
 
   final TaskStatus taskStatus;
+  final double fetchingScrollOffset;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _TaskListState();
@@ -17,11 +19,23 @@ class TaskList extends ConsumerStatefulWidget {
 
 class _TaskListState extends ConsumerState<TaskList> {
   late StateNotifierProvider<TaskNotifier, TaskState> taskNotifierProvider;
+  final scrollController = ScrollController();
 
   @override
   void initState() {
     taskNotifierProvider = getTaskNotifierProvider(widget.taskStatus.value);
+    scrollController.addListener(scrollControllerListener);
+
     super.initState();
+  }
+
+  void scrollControllerListener() {
+    bool isFetching = ref.read(taskNotifierProvider.notifier).isFetching;
+    if (!isFetching &&
+        scrollController.position.extentAfter > 0 &&
+        scrollController.position.extentAfter < widget.fetchingScrollOffset) {
+      ref.read(taskNotifierProvider.notifier).fetchTask();
+    }
   }
 
   @override
@@ -38,15 +52,14 @@ class _TaskListState extends ConsumerState<TaskList> {
             ? Column(children: [
                 Expanded(
                   child: Scrollbar(
+                    controller: scrollController,
                     child: ListView.builder(
+                      controller: scrollController,
                       padding: const EdgeInsets.all(8),
                       itemCount:
                           groupedTaskKeys.length + (notifier.hasMore ? 1 : 0),
                       itemBuilder: (BuildContext context, int index) {
                         if (index == groupedTaskKeys.length) {
-                          if (!notifier.isFetching) {
-                            ref.read(taskNotifierProvider.notifier).fetchTask();
-                          }
                           return const Center(
                             child: Padding(
                               padding: EdgeInsets.all(20.0),
