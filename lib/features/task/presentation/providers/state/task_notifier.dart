@@ -17,19 +17,21 @@ class TaskNotifier extends StateNotifier<TaskState> {
   ) : super(TaskState.initial(taskStatus: taskStatus));
 
   bool get isFetching =>
-      state.state != TaskConcreteState.loading &&
-      state.state != TaskConcreteState.fetchingMore;
+      state.state == TaskConcreteState.loading ||
+      state.state == TaskConcreteState.fetchingMore;
+
+  bool get hasMore => state.state != TaskConcreteState.fetchedAllProducts;
 
   Future<void> fetchTask() async {
-    if (isFetching && state.state != TaskConcreteState.fetchedAllProducts) {
+    if (isFetching) return;
+    if (state.state != TaskConcreteState.fetchedAllProducts) {
+      await Future.delayed(const Duration(milliseconds: 500));
       state = state.copyWith(
         state: state.page > 0
             ? TaskConcreteState.fetchingMore
             : TaskConcreteState.loading,
         isLoading: true,
       );
-
-      await Future.delayed(const Duration(milliseconds: 500));
 
       final response = await taskRepository.getTasks(
         offset: state.page,
