@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/features/task/presentation/providers/state/task_notifier.dart';
 import 'package:flutter_project/features/task/presentation/providers/state/task_state.dart';
+import 'package:flutter_project/features/task/presentation/widgets/task_list_loading.dart';
 import 'package:flutter_project/shared/domain/models/task/task_status.dart';
 import 'package:flutter_project/features/task/presentation/providers/task_state_provider.dart';
 import 'package:flutter_project/features/task/presentation/widgets/task_list_item.dart';
@@ -41,17 +42,18 @@ class _TaskListState extends ConsumerState<TaskList> {
     final groupedTasks = state.groupedTasks;
     final groupedTaskKeys = groupedTasks.keys.toList();
     final groupedTaskValues = groupedTasks.values.toList();
+    final isLoading = state.isLoading;
+    final itemCount = groupedTaskKeys.length + (notifier.hasMore ? 1 : 0);
 
-    return state.state == TaskConcreteState.loading
-        ? const Center(child: CircularProgressIndicator()) // TODO: Add skeleton
+    return isLoading
+        ? const TaskListLoading()
         : state.hasData
             ? LazyLoadScrollView(
                 onEndOfPage: () => _loadMore(),
                 scrollOffset: widget.fetchingScrollOffset,
                 child: ListView.builder(
                   padding: const EdgeInsets.all(8),
-                  itemCount:
-                      groupedTaskKeys.length + (notifier.hasMore ? 1 : 0),
+                  itemCount: itemCount,
                   itemBuilder: (BuildContext context, int index) {
                     if (index == groupedTaskKeys.length) {
                       return const Center(
