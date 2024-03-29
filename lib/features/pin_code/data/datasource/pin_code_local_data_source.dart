@@ -4,7 +4,7 @@ import 'package:flutter_project/shared/exceptions/http_exception.dart';
 
 class PinCodeLocalDataSource implements PinCodeDataSource {
   PinCodeLocalDataSource();
-  final String _correctPin = '111111';
+  final String _correctPin = '123456';
 
   @override
   Future<Either<AppException, bool>> checkPin({required String pinCode}) async {
