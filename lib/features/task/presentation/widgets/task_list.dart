@@ -6,6 +6,7 @@ import 'package:flutter_project/shared/domain/models/task/task_model.dart';
 import 'package:flutter_project/shared/domain/models/task/task_status.dart';
 import 'package:flutter_project/features/task/presentation/providers/task_state_provider.dart';
 import 'package:flutter_project/features/task/presentation/widgets/task_list_item.dart';
+import 'package:flutter_project/shared/widgets/app_dismissible.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
@@ -91,9 +92,12 @@ class _TaskListState extends ConsumerState<TaskList> {
                             : Column(
                                 children: List.generate(
                                   groupedTaskValues[index].length,
-                                  (indexItem) => TaskListItem(
-                                    task: groupedTaskValues[index][indexItem],
-                                    onDeleteTask: (task) => _deleteTask(task),
+                                  (indexItem) => AppDissMisssiable(
+                                    child: TaskListItem(
+                                      task: groupedTaskValues[index][indexItem],
+                                    ),
+                                    onDelete: () => _deleteTask(
+                                        groupedTaskValues[index][indexItem]),
                                   ),
                                 ),
                               ),
