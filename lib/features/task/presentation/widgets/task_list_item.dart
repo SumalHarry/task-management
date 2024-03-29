@@ -3,9 +3,10 @@ import 'package:flutter_project/shared/domain/models/task/task_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TaskListItem extends ConsumerWidget {
-  const TaskListItem({super.key, required this.task});
+  const TaskListItem({super.key, required this.task, this.onDeleteTask});
 
   final Task task;
+  final ValueChanged<Task>? onDeleteTask;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,7 +23,6 @@ class TaskListItem extends ConsumerWidget {
           ),
         ),
       ),
-      onDismissed: (DismissDirection direction) {},
       confirmDismiss: (DismissDirection direction) async {
         return await showDialog(
           context: context,
@@ -32,7 +32,10 @@ class TaskListItem extends ConsumerWidget {
               content: const Text("Are you sure you wish to delete this item?"),
               actions: [
                 TextButton(
-                    onPressed: () => Navigator.of(context).pop(true),
+                    onPressed: () {
+                      Navigator.of(context).pop(true);
+                      if (onDeleteTask != null) onDeleteTask!.call(task);
+                    },
                     child: const Text("DELETE")),
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(false),

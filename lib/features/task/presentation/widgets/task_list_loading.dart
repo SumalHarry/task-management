@@ -24,14 +24,14 @@ class TaskListLoading extends ConsumerWidget {
                   left: 20.0,
                   right: 20.0,
                 ),
-                child: Text(List.generate(30, (index) => '-').join('')),
+                child: Text(List.generate(10, (index) => '-').join('')),
               ),
               Column(
                 children: List.generate(
                   1,
                   (indexItem) => TaskListItem(
                     task: Task(
-                      id: List.generate(30, (index) => '-').join(''),
+                      id: List.generate(10, (index) => '-').join(''),
                       title: List.generate(30, (index) => '-').join(''),
                       description: List.generate(20, (index) => '-').join(''),
                       createdAt: List.generate(30, (index) => '-').join(''),

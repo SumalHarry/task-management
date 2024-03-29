@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_project/features/main/presentation/screen/main_screen.dart';
-import 'package:flutter_project/features/pin_code/presentation/screens/pin_code_screen.dart';
 import '../features/splash/presentation/screens/splash_screen.dart';
 part 'app_route.gr.dart';
 

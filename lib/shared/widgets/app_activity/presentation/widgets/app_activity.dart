@@ -38,7 +38,14 @@ class _AppActivityState extends ConsumerState<AppActivity> {
     bool isActivity = currentState == AppActivityConcreteState.activity;
     return (isActivity)
         ? GestureDetector(
-            child: widget.child,
+            child: NotificationListener<ScrollNotification>(
+                child: widget.child,
+                onNotification: (notification) {
+                  if (notification is ScrollUpdateNotification) {
+                    _handleUserInteraction();
+                  }
+                  return false;
+                }),
             onTap: () => _handleUserInteraction(),
             onPanDown: (_) => _handleUserInteraction(),
             onScaleStart: (_) => _handleUserInteraction(),

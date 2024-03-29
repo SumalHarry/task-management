@@ -50,6 +50,19 @@ class TaskNotifier extends StateNotifier<TaskState> {
     }
   }
 
+  void deleteTask(String taskId) {
+    TaskList totalTasks = state.taskList;
+    totalTasks.removeWhere((element) => element.id == taskId);
+    final groupedTasks = groupTasksByCreateAtString(totalTasks);
+    state = state.copyWith(
+      taskList: totalTasks,
+      groupedTasks: groupedTasks,
+      hasData: true,
+      message: totalTasks.isEmpty ? 'No task found' : '',
+      isLoading: false,
+    );
+  }
+
   void updateStateFromResponse(
     Either<AppException, TaskPaginatedResponse<dynamic>> response,
   ) {

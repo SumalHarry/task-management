@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/features/task/presentation/providers/state/task_notifier.dart';
 import 'package:flutter_project/features/task/presentation/providers/state/task_state.dart';
 import 'package:flutter_project/features/task/presentation/widgets/task_list_loading.dart';
+import 'package:flutter_project/shared/domain/models/task/task_model.dart';
 import 'package:flutter_project/shared/domain/models/task/task_status.dart';
 import 'package:flutter_project/features/task/presentation/providers/task_state_provider.dart';
 import 'package:flutter_project/features/task/presentation/widgets/task_list_item.dart';
@@ -35,6 +36,10 @@ class _TaskListState extends ConsumerState<TaskList> {
     }
   }
 
+  void _deleteTask(Task task) {
+    ref.read(taskNotifierProvider.notifier).deleteTask(task.id);
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(taskNotifierProvider);
@@ -42,10 +47,10 @@ class _TaskListState extends ConsumerState<TaskList> {
     final groupedTasks = state.groupedTasks;
     final groupedTaskKeys = groupedTasks.keys.toList();
     final groupedTaskValues = groupedTasks.values.toList();
-    final isLoading = state.isLoading;
+    final isInitialLoading = state.isLoading && state.page == 0;
     final itemCount = groupedTaskKeys.length + (notifier.hasMore ? 1 : 0);
 
-    return isLoading
+    return isInitialLoading
         ? const TaskListLoading()
         : state.hasData
             ? LazyLoadScrollView(
@@ -88,6 +93,7 @@ class _TaskListState extends ConsumerState<TaskList> {
                                   groupedTaskValues[index].length,
                                   (indexItem) => TaskListItem(
                                     task: groupedTaskValues[index][indexItem],
+                                    onDeleteTask: (task) => _deleteTask(task),
                                   ),
                                 ),
                               ),

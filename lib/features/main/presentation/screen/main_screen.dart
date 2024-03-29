@@ -1,11 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_project/features/pin_code/presentation/porviders/pin_code_providers.dart';
-import 'package:flutter_project/features/pin_code/presentation/porviders/state/pin_code_state.dart';
-import 'package:flutter_project/features/pin_code/presentation/screens/pin_code_screen.dart';
 import 'package:flutter_project/shared/domain/models/task/task_status.dart';
 import 'package:flutter_project/features/task/presentation/widgets/task_list.dart';
-import 'package:flutter_project/shared/widgets/app_activity/presentation/providers/app_activity_state_providers.dart';
 import 'package:flutter_project/shared/widgets/app_activity/presentation/widgets/app_activity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -22,6 +18,8 @@ class MainScreen extends ConsumerStatefulWidget {
 class _MainScreenState extends ConsumerState<MainScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  final ScrollController _scrollController = ScrollController();
+
   List<TaskStatus> tabStatus = [
     TaskStatus.TODO,
     TaskStatus.DOING,
@@ -34,6 +32,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
       length: tabStatus.length,
       vsync: this,
     );
+    _tabController.addListener(_handleTabSelection);
     super.initState();
   }
 
@@ -43,15 +42,30 @@ class _MainScreenState extends ConsumerState<MainScreen>
     super.dispose();
   }
 
+  _handleTabSelection() {
+    if (_tabController.indexIsChanging) {
+      _scrollToTop();
+    }
+  }
+
+  _scrollToTop() {
+    _scrollController.animateTo(
+      100.0,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppActivity(
       child: Scaffold(
         body: NestedScrollView(
+          controller: _scrollController,
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                surfaceTintColor: Colors.purple,
+                surfaceTintColor: Colors.transparent,
                 backgroundColor: Colors.purple,
                 stretch: false,
                 actions: [
