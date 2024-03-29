@@ -4,6 +4,8 @@ final kTestMode = Platform.environment.containsKey('FLUTTER_TEST');
 
 const int PIN_LENGTH = 6;
 const int ITEMS_PER_PAGE = 10;
+const String CREATE_AT = "createdAt";
+
 const int IN_ACTIVITY_DURATION = 10;
 const String APP_THEME_STORAGE_KEY = 'APP_THEME_STORAGE_KEY';
 

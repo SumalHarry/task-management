@@ -1,25 +1,25 @@
 import 'package:flutter_project/shared/globals.dart';
 
-class TaskPaginatedResponse<T> {
-  final int totalPages;
+class PaginatedResponse<T> {
   final int pageNumber;
+  final int totalPages;
 
   static const limit = ITEMS_PER_PAGE;
 
   final List<T> data;
 
-  TaskPaginatedResponse(
+  PaginatedResponse(
       {required this.totalPages, required this.pageNumber, required this.data});
 
-  factory TaskPaginatedResponse.fromJson(dynamic json, List<T> data,
+  factory PaginatedResponse.fromJson(dynamic json, List<T> data,
           {Function(dynamic json)? fixture}) =>
-      TaskPaginatedResponse(
+      PaginatedResponse(
         pageNumber: json['pageNumber'] ?? 0,
         totalPages: json['totalPages'] ?? 0,
         data: data,
       );
   @override
   String toString() {
-    return 'PaginatedResponse(total:$totalPages, skip:$pageNumber, data:${data.length})';
+    return 'PaginatedResponse(pageNumber:$pageNumber, totalPages:$totalPages, data:${data.length})';
   }
 }

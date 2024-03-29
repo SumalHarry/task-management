@@ -1,7 +1,7 @@
 import 'package:flutter_project/features/task/data/datasource/task_remote_data_source.dart';
 import 'package:flutter_project/features/task/domain/repository/task_repository.dart';
 import 'package:flutter_project/shared/domain/models/either.dart';
-import 'package:flutter_project/shared/domain/models/task_paginated_response.dart';
+import 'package:flutter_project/shared/domain/models/paginated_response.dart';
 import 'package:flutter_project/shared/exceptions/http_exception.dart';
 
 class TaskRepositoryImpl extends TaskRepository {
@@ -9,7 +9,7 @@ class TaskRepositoryImpl extends TaskRepository {
   TaskRepositoryImpl(this.taskDatasource);
 
   @override
-  Future<Either<AppException, TaskPaginatedResponse>> getTasks({
+  Future<Either<AppException, PaginatedResponse>> getTasks({
     required int offset,
     required int limit,
     required String sortBy,

@@ -17,15 +17,15 @@ class AppDissMisssiable extends ConsumerWidget {
     return Dismissible(
       key: UniqueKey(),
       direction: DismissDirection.endToStart,
-      background: const ColoredBox(
-        color: Colors.red,
-        child: Align(
-          alignment: Alignment.centerRight,
-          child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Icon(Icons.delete, color: Colors.white),
-          ),
+      background: Container(
+        alignment: Alignment.centerRight,
+        padding: EdgeInsets.all(16.0),
+        margin: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8),
+        decoration: BoxDecoration(
+          color: Colors.red,
+          borderRadius: BorderRadius.circular(10.0),
         ),
+        child: Icon(Icons.delete, color: Colors.white),
       ),
       onDismissed: (DismissDirection direction) {},
       confirmDismiss: (DismissDirection direction) async {

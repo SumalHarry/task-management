@@ -69,7 +69,7 @@ class TaskState extends Equatable {
 
   @override
   String toString() {
-    return 'TaskState{taskList: $taskList, page: $page, hasData: $hasData, state: $state, message: $message}';
+    return 'TaskState(taskList: $taskList, page: $page, hasData: $hasData, state: $state, message: $message)';
   }
 
   @override

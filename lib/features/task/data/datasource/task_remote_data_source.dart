@@ -1,10 +1,10 @@
 import 'package:flutter_project/shared/data/remote/network_service.dart';
 import 'package:flutter_project/shared/domain/models/either.dart';
-import 'package:flutter_project/shared/domain/models/task_paginated_response.dart';
+import 'package:flutter_project/shared/domain/models/paginated_response.dart';
 import 'package:flutter_project/shared/exceptions/http_exception.dart';
 
 abstract class TaskDataSource {
-  Future<Either<AppException, TaskPaginatedResponse>> getTasks({
+  Future<Either<AppException, PaginatedResponse>> getTasks({
     required int offset,
     required int limit,
     required String sortBy,
@@ -20,7 +20,7 @@ class TaskRemoteDataSource implements TaskDataSource {
   final NetworkService networkService;
 
   @override
-  Future<Either<AppException, TaskPaginatedResponse>> getTasks({
+  Future<Either<AppException, PaginatedResponse>> getTasks({
     required int offset,
     required int limit,
     required String sortBy,
@@ -45,7 +45,7 @@ class TaskRemoteDataSource implements TaskDataSource {
         (response) {
           final jsonData = response.data;
           final taskResponse =
-              TaskPaginatedResponse.fromJson(jsonData, jsonData['tasks'] ?? []);
+              PaginatedResponse.fromJson(jsonData, jsonData['tasks'] ?? []);
           return Right(taskResponse);
         },
       );

@@ -2,7 +2,7 @@ import 'package:flutter_project/features/task/domain/repository/task_repository.
 import 'package:flutter_project/features/task/presentation/providers/state/task_state.dart';
 import 'package:flutter_project/shared/domain/models/either.dart';
 import 'package:flutter_project/shared/domain/models/task/task_model.dart';
-import 'package:flutter_project/shared/domain/models/task_paginated_response.dart';
+import 'package:flutter_project/shared/domain/models/paginated_response.dart';
 import 'package:flutter_project/shared/exceptions/http_exception.dart';
 import 'package:flutter_project/shared/globals.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -36,7 +36,7 @@ class TaskNotifier extends StateNotifier<TaskState> {
       final response = await taskRepository.getTasks(
         offset: state.page,
         limit: ITEMS_PER_PAGE,
-        sortBy: "createdAt",
+        sortBy: CREATE_AT,
         isAsc: true,
         status: taskStatus,
       );
@@ -64,7 +64,7 @@ class TaskNotifier extends StateNotifier<TaskState> {
   }
 
   void updateStateFromResponse(
-    Either<AppException, TaskPaginatedResponse<dynamic>> response,
+    Either<AppException, PaginatedResponse<dynamic>> response,
   ) {
     response.fold((failure) {
       state = state.copyWith(
