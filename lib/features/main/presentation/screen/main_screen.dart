@@ -124,8 +124,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
                     labelStyle: const TextStyle(fontWeight: FontWeight.w700),
                     labelColor: Colors.white,
                     controller: _tabController,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
+                    padding: const EdgeInsets.all(10),
                     indicator: BoxDecoration(
                       boxShadow: const [
                         BoxShadow(
@@ -224,14 +223,18 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
           ),
         ),
       ),
-      Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      SafeArea(
+        top: false,
+        bottom: false,
         child: Container(
-          decoration: BoxDecoration(
-            color: Colors.grey.shade200,
-            borderRadius: BorderRadius.circular(30),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: _tabBar,
           ),
-          child: _tabBar,
         ),
       ),
     ]);

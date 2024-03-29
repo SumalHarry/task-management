@@ -51,6 +51,22 @@ class _TaskListState extends ConsumerState<TaskList> {
     final isInitialLoading = state.isLoading && state.page == 0;
     final itemCount = groupedTaskKeys.length + (notifier.hasMore ? 1 : 0);
 
+    ref.listen(
+      taskNotifierProvider.select((value) => value),
+      ((TaskState? previous, TaskState next) {
+        //show Snackbar on failure
+        if (next.state == TaskConcreteState.fetchedAllProducts) {
+          if (next.message.isNotEmpty) {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(next.message.toString())));
+          }
+        } else if (next.state == TaskConcreteState.failure) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(next.message.toString())));
+        }
+      }),
+    );
+
     return isInitialLoading
         ? const TaskListLoading()
         : state.hasData
@@ -83,21 +99,30 @@ class _TaskListState extends ConsumerState<TaskList> {
                           ),
                           child: Text(
                             groupedTaskKeys[index],
+                            style: const TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         (groupedTasks.isEmpty)
                             ? const Center(
                                 child: Text("No task available"),
                               )
-                            : Column(
-                                children: List.generate(
-                                  groupedTaskValues[index].length,
-                                  (indexItem) => AppDissMisssiable(
-                                    child: TaskListItem(
-                                      task: groupedTaskValues[index][indexItem],
+                            : Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20.0),
+                                child: Column(
+                                  children: List.generate(
+                                    groupedTaskValues[index].length,
+                                    (indexItem) => AppDissMisssiable(
+                                      child: TaskListItem(
+                                        task: groupedTaskValues[index]
+                                            [indexItem],
+                                      ),
+                                      onDelete: () => _deleteTask(
+                                          groupedTaskValues[index][indexItem]),
                                     ),
-                                    onDelete: () => _deleteTask(
-                                        groupedTaskValues[index][indexItem]),
                                   ),
                                 ),
                               ),

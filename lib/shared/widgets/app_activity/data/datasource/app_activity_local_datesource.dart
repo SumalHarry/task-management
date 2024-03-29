@@ -40,7 +40,7 @@ class AppActivityLocalDatasource extends AppActivityDataSource {
   @override
   Future<bool> getIsVerifyPin() async {
     final data = await storageService.get(storageKeyIsVerifyPin);
-    return data != null ? data.toString().toLowerCase() == 'true' : true;
+    return data != null ? data.toString().toLowerCase() == 'true' : false;
   }
 
   @override

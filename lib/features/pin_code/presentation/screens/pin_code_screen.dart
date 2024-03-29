@@ -29,6 +29,9 @@ class _PinCodeScreenState extends ConsumerState<PinCodeScreen> {
       ((previous, next) {
         if (next.state == PinCodeConcreteState.success) {
           widget.onVerified();
+        } else if (next.state == PinCodeConcreteState.failure) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(next.message.toString())));
         }
       }),
     );
@@ -80,19 +83,8 @@ class _PinCodeScreenState extends ConsumerState<PinCodeScreen> {
                   },
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
-                child: (state.state == PinCodeConcreteState.failure &&
-                        state.message.isNotEmpty)
-                    ? Text(
-                        state.message,
-                        style: const TextStyle(
-                          fontSize: 22,
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    : const SizedBox(),
               ),
               Numpad(
                 buttonSize: buttonSize,

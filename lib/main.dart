@@ -16,6 +16,12 @@ Future<void> mainCommon(AppEnvironment environment) async {
       statusBarBrightness: Brightness.light,
     ),
   );
+
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   runApp(ProviderScope(
     observers: [
       Observers(),
