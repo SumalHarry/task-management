@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_project/features/main/presentation/widgets/main_app_bar_expanded_view.dart';
 import 'package:flutter_project/shared/domain/models/task/task_status.dart';
 import 'package:flutter_project/features/task/presentation/widgets/task_list.dart';
+import 'package:flutter_project/shared/theme/app_colors.dart';
 import 'package:flutter_project/shared/widgets/app_activity/presentation/widgets/app_activity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -58,16 +60,38 @@ class _MainScreenState extends ConsumerState<MainScreen>
 
   @override
   Widget build(BuildContext context) {
+    BoxDecoration decorationLinearGradient = const BoxDecoration(
+      gradient: LinearGradient(
+        colors: [
+          AppColors.secondary,
+          AppColors.primary,
+        ],
+      ),
+    );
+
     return AppActivity(
       child: Scaffold(
         body: NestedScrollView(
           controller: _scrollController,
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
+            return [
               SliverAppBar(
+                title: Container(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: const Text(
+                    'Hi, User',
+                    style: TextStyle(
+                      fontSize: 25.0,
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                elevation: 10,
+                expandedHeight: 150.0,
+                centerTitle: false,
+                pinned: true,
                 surfaceTintColor: Colors.transparent,
-                backgroundColor: Colors.purple,
-                stretch: false,
                 actions: [
                   IconButton(
                     onPressed: () {},
@@ -78,16 +102,15 @@ class _MainScreenState extends ConsumerState<MainScreen>
                     ),
                   ),
                 ],
-                pinned: true,
-                expandedHeight: 150.0,
-                centerTitle: false,
-                title: const Padding(
-                  padding: EdgeInsets.only(left: 25.0),
-                  child: Text('Hi, User'),
-                ),
-                flexibleSpace: FlexibleSpaceBar(
-                  background: Container(
-                    color: Colors.purple,
+                flexibleSpace: DecoratedBox(
+                  decoration: decorationLinearGradient,
+                  child: FlexibleSpaceBar(
+                    collapseMode: CollapseMode.parallax,
+                    background: Container(
+                      padding: const EdgeInsets.only(bottom: 25.0),
+                      decoration: decorationLinearGradient,
+                      child: const MainAppBarExpandedView(),
+                    ),
                   ),
                 ),
               ),
@@ -104,8 +127,8 @@ class _MainScreenState extends ConsumerState<MainScreen>
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 10),
                     indicator: BoxDecoration(
-                      boxShadow: [
-                        const BoxShadow(
+                      boxShadow: const [
+                        BoxShadow(
                           color: Colors.grey,
                           blurRadius: 1.0,
                           offset: Offset(
@@ -117,8 +140,8 @@ class _MainScreenState extends ConsumerState<MainScreen>
                       borderRadius: BorderRadius.circular(25.0),
                       gradient: const LinearGradient(
                         colors: [
-                          Colors.grey,
-                          Colors.blue,
+                          AppColors.secondary,
+                          AppColors.primary,
                         ],
                       ),
                     ),
@@ -152,7 +175,10 @@ class _MainScreenState extends ConsumerState<MainScreen>
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
             gradient: LinearGradient(
-              colors: [Colors.purple, Colors.deepOrange],
+              colors: [
+                AppColors.secondary,
+                AppColors.primary,
+              ],
             ),
           ),
           child: FloatingActionButton(
@@ -184,8 +210,13 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
       Positioned(
         child: Container(
           height: 30,
-          decoration: BoxDecoration(
-            color: Colors.purple,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                AppColors.secondary,
+                AppColors.primary,
+              ],
+            ),
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(30),
               bottomRight: Radius.circular(30),

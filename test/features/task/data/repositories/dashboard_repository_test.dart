@@ -1,5 +1,5 @@
 import 'package:flutter_project/features/task/data/datasource/task_remote_data_source.dart';
-import 'package:flutter_project/features/task/data/repositories/task_repository.dart';
+import 'package:flutter_project/features/task/data/repositories/task_repository_impl.dart';
 import 'package:flutter_project/features/task/domain/repository/task_repository.dart';
 import 'package:flutter_project/shared/domain/models/either.dart';
 import 'package:flutter_project/shared/domain/models/paginated_response.dart';
@@ -39,7 +39,7 @@ void main() {
         limit: ITEMS_PER_PAGE,
         sortBy: CREATE_AT,
         isAsc: true,
-        status: TaskStatus.TODO.value,
+        status: taskStatus,
       );
 
       // act
@@ -65,7 +65,7 @@ void main() {
           limit: ITEMS_PER_PAGE,
           sortBy: CREATE_AT,
           isAsc: true,
-          status: TaskStatus.TODO.value,
+          status: taskStatus,
         );
 
         // act

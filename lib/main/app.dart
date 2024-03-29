@@ -13,7 +13,7 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(appThemeProvider);
     return MaterialApp.router(
-      title: 'Flutter TDD',
+      title: 'Task Manager',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: themeMode,
