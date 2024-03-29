@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/shared/theme/app_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class NumberButton extends ConsumerWidget {
@@ -22,7 +23,7 @@ class NumberButton extends ConsumerWidget {
         height: buttonSize,
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
-          color: Colors.black12,
+          color: Colors.white24,
         ),
         child: MaterialButton(
           shape: const CircleBorder(),
@@ -30,7 +31,7 @@ class NumberButton extends ConsumerWidget {
           child: Text(
             number.toString(),
             style: const TextStyle(
-              color: Colors.black,
+              color: AppColors.white,
               fontSize: 24.0,
             ),
           ),

@@ -3,6 +3,7 @@ import 'package:flutter_project/features/pin_code/presentation/porviders/pin_cod
 import 'package:flutter_project/features/pin_code/presentation/porviders/state/pin_code_state.dart';
 import 'package:flutter_project/features/pin_code/presentation/widgets/widget_pin_code.dart';
 import 'package:flutter_project/shared/globals.dart';
+import 'package:flutter_project/shared/theme/app_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PinCodeScreen extends ConsumerStatefulWidget {
@@ -33,59 +34,74 @@ class _PinCodeScreenState extends ConsumerState<PinCodeScreen> {
     );
 
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const Center(
-              child: Text(
-                'Enter Your Pin',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.w600,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              AppColors.secondary,
+              Theme.of(context).primaryColor,
+            ],
+          ),
+        ),
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const SizedBox(),
+              const Center(
+                child: Text(
+                  'Security Pin',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.white,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 50),
+              const SizedBox(height: 50),
 
-            /// pin code area
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                PIN_LENGTH,
-                (index) {
-                  return Container(
-                    margin: const EdgeInsets.all(6.0),
-                    width: 16,
-                    height: 16,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: index < state.enteredPin.length
-                          ? Colors.blue
-                          : Colors.blue.withOpacity(0.1),
-                    ),
-                  );
-                },
+              /// pin code area
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  PIN_LENGTH,
+                  (index) {
+                    return Container(
+                      margin: const EdgeInsets.all(6.0),
+                      width: 22,
+                      height: 22,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: index < state.enteredPin.length
+                            ? Theme.of(context).primaryColor
+                            : Colors.white24,
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-            SizedBox(
+              SizedBox(
                 height: 40,
                 child: (state.state == PinCodeConcreteState.failure &&
                         state.message.isNotEmpty)
                     ? Text(
                         state.message,
-                        style: TextStyle(
-                          fontSize: 20,
+                        style: const TextStyle(
+                          fontSize: 22,
                           color: Colors.red,
+                          fontWeight: FontWeight.bold,
                         ),
                       )
-                    : SizedBox()),
-            Numpad(
-              buttonSize: buttonSize,
-              onPressedNumber: (value) => notifier.addPinNumber(value),
-              onPressedDelete: () => notifier.removePinNumber(),
-            )
-          ],
+                    : const SizedBox(),
+              ),
+              Numpad(
+                buttonSize: buttonSize,
+                onPressedNumber: (value) => notifier.addPinNumber(value),
+                onPressedDelete: () => notifier.removePinNumber(),
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );

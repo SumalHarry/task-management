@@ -60,11 +60,11 @@ class _MainScreenState extends ConsumerState<MainScreen>
 
   @override
   Widget build(BuildContext context) {
-    BoxDecoration decorationLinearGradient = const BoxDecoration(
+    BoxDecoration decorationLinearGradient = BoxDecoration(
       gradient: LinearGradient(
         colors: [
           AppColors.secondary,
-          AppColors.primary,
+          Theme.of(context).primaryColor,
         ],
       ),
     );
@@ -138,10 +138,10 @@ class _MainScreenState extends ConsumerState<MainScreen>
                         ),
                       ],
                       borderRadius: BorderRadius.circular(25.0),
-                      gradient: const LinearGradient(
+                      gradient: LinearGradient(
                         colors: [
                           AppColors.secondary,
-                          AppColors.primary,
+                          Theme.of(context).primaryColor,
                         ],
                       ),
                     ),
@@ -172,12 +172,12 @@ class _MainScreenState extends ConsumerState<MainScreen>
         floatingActionButton: Container(
           height: 60,
           width: 60,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             shape: BoxShape.circle,
             gradient: LinearGradient(
               colors: [
                 AppColors.secondary,
-                AppColors.primary,
+                Theme.of(context).primaryColor,
               ],
             ),
           ),
@@ -210,14 +210,14 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
       Positioned(
         child: Container(
           height: 30,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
                 AppColors.secondary,
-                AppColors.primary,
+                Theme.of(context).primaryColor,
               ],
             ),
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(30),
               bottomRight: Radius.circular(30),
             ),
