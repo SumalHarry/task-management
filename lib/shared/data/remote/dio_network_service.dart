@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_project/configs/app_configs.dart';
+import 'package:flutter_project/main/app_env.dart';
 import 'package:flutter_project/shared/data/remote/network_service.dart';
 import 'package:flutter_project/shared/domain/models/either.dart';
 import 'package:flutter_project/shared/domain/models/response.dart' as response;
@@ -26,7 +26,7 @@ class DioNetworkService extends NetworkService with ExceptionHandlerMixin {
         headers: headers,
       );
   @override
-  String get baseUrl => AppConfigs.baseUrl;
+  String get baseUrl => EnvInfo.connectionString;
 
   @override
   Map<String, Object> get headers => {
