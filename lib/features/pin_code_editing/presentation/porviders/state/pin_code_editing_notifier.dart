@@ -49,7 +49,7 @@ class PinCodeEditingNotifier extends StateNotifier<PinCodeEditingState> {
           return state.copyWith(
             state: PinCodeConcreteState.failure,
             isLoading: false,
-            message: 'Pin is incorrect',
+            message: 'Pin is match',
             enteredPin: '',
           );
         }

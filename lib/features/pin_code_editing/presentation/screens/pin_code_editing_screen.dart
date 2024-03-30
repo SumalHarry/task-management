@@ -6,6 +6,7 @@ import 'package:flutter_project/features/pin_code_editing/presentation/porviders
 import 'package:flutter_project/features/pin_code_editing/presentation/porviders/state/pin_code_editing_state.dart';
 import 'package:flutter_project/shared/globals.dart';
 import 'package:flutter_project/shared/theme/app_colors.dart';
+import 'package:flutter_project/shared/widgets/app_activity/presentation/widgets/app_activity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
@@ -50,74 +51,76 @@ class _PinCodeEditingScreenState extends ConsumerState<PinCodeEditingScreen> {
       ),
     );
 
-    return Scaffold(
-      appBar: AppBar(
-        foregroundColor: AppColors.white,
-        title: Text(
-          title,
-          style: const TextStyle(
-            fontSize: 26,
-            fontWeight: FontWeight.w600,
-            color: AppColors.white,
+    return AppActivity(
+      child: Scaffold(
+        appBar: AppBar(
+          foregroundColor: AppColors.white,
+          title: Text(
+            title,
+            style: const TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.w600,
+              color: AppColors.white,
+            ),
           ),
-        ),
-        centerTitle: true,
-        flexibleSpace: DecoratedBox(
-          decoration: decorationLinearGradient,
-          child: FlexibleSpaceBar(
-            collapseMode: CollapseMode.parallax,
-            background: Container(
-              padding: const EdgeInsets.only(bottom: 25.0),
-              decoration: decorationLinearGradient,
+          centerTitle: true,
+          flexibleSpace: DecoratedBox(
+            decoration: decorationLinearGradient,
+            child: FlexibleSpaceBar(
+              collapseMode: CollapseMode.parallax,
+              background: Container(
+                padding: const EdgeInsets.only(bottom: 25.0),
+                decoration: decorationLinearGradient,
+              ),
             ),
           ),
         ),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              AppColors.secondary,
-              Theme.of(context).primaryColor,
-            ],
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                AppColors.secondary,
+                Theme.of(context).primaryColor,
+              ],
+            ),
           ),
-        ),
-        child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              const SizedBox(height: 50),
+          child: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const SizedBox(height: 50),
 
-              /// pin code area
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  PIN_LENGTH,
-                  (index) {
-                    return Container(
-                      margin: const EdgeInsets.all(6.0),
-                      width: 22,
-                      height: 22,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: index < state.enteredPin.length
-                            ? Theme.of(context).primaryColor
-                            : Colors.white24,
-                      ),
-                    );
-                  },
+                /// pin code area
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    PIN_LENGTH,
+                    (index) {
+                      return Container(
+                        margin: const EdgeInsets.all(6.0),
+                        width: 22,
+                        height: 22,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: index < state.enteredPin.length
+                              ? Theme.of(context).primaryColor
+                              : Colors.white24,
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              Numpad(
-                buttonSize: buttonSize,
-                onPressedNumber: (value) => notifier.addPinNumber(value),
-                onPressedDelete: () => notifier.removePinNumber(),
-              ),
-              const SizedBox(height: 20),
-            ],
+                const SizedBox(
+                  height: 40,
+                ),
+                Numpad(
+                  buttonSize: buttonSize,
+                  onPressedNumber: (value) => notifier.addPinNumber(value),
+                  onPressedDelete: () => notifier.removePinNumber(),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
           ),
         ),
       ),
