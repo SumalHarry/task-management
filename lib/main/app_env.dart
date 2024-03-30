@@ -17,15 +17,15 @@ abstract class EnvInfo {
 
 extension _EnvProperties on AppEnvironment {
   static const _appTitles = {
-    AppEnvironment.DEV: 'Q Flutter TDD Dev',
-    AppEnvironment.STAGING: 'Q Flutter TDD Staging',
-    AppEnvironment.PROD: 'Q Flutter TDD',
+    AppEnvironment.DEV: 'Task Management Dev',
+    AppEnvironment.STAGING: 'Task Management Staging',
+    AppEnvironment.PROD: 'Task Management',
   };
 
   static const _connectionStrings = {
-    AppEnvironment.DEV: 'https://api.spoonacular.com',
-    AppEnvironment.STAGING: 'https://api.spoonacular.com',
-    AppEnvironment.PROD: 'https://api.spoonacular.com',
+    AppEnvironment.DEV: 'https://todo-list-api-mfchjooefq-as.a.run.app',
+    AppEnvironment.STAGING: 'https://todo-list-api-mfchjooefq-as.a.run.app',
+    AppEnvironment.PROD: 'https://todo-list-api-mfchjooefq-as.a.run.app',
   };
 
   static const _envs = {
