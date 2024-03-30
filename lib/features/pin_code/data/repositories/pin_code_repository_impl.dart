@@ -9,8 +9,8 @@ class PinCodeRepositoryImpl extends PinCodeRepository {
   PinCodeRepositoryImpl(this.dataSource);
 
   @override
-  Future<Either<AppException, bool>> checkPin({required String pinCode}) {
-    return dataSource.checkPin(pinCode: pinCode);
+  Future<Either<AppException, bool>> checkPin(String pinCode) {
+    return dataSource.checkPin(pinCode);
   }
 
   @override

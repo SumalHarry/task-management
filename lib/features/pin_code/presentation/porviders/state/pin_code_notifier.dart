@@ -4,16 +4,14 @@ import 'package:flutter_project/shared/globals.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PinCodeNotifier extends StateNotifier<PinCodeState> {
-  PinCodeNotifier({
-    required this.pinCodeRepository,
-  }) : super(const PinCodeState.initial());
+  PinCodeNotifier(this.pinCodeRepository) : super(const PinCodeState.initial());
 
   final PinCodeRepository pinCodeRepository;
 
   Future<void> checkPin(String pinCode) async {
     state =
         state.copyWith(isLoading: true, state: PinCodeConcreteState.inProgress);
-    final response = await pinCodeRepository.checkPin(pinCode: pinCode);
+    final response = await pinCodeRepository.checkPin(pinCode);
 
     state = await response.fold(
       (failure) async {

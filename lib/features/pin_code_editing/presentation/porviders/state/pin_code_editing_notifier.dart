@@ -27,7 +27,7 @@ class PinCodeEditingNotifier extends StateNotifier<PinCodeEditingState> {
   Future<void> _confirmOldPin(String pinCode) async {
     state =
         state.copyWith(isLoading: true, state: PinCodeConcreteState.inProgress);
-    final response = await pinCodeRepository.checkPin(pinCode: pinCode);
+    final response = await pinCodeRepository.checkPin(pinCode);
     state = await response.fold(
       (failure) async {
         return state.copyWith(

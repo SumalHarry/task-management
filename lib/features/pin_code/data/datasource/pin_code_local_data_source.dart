@@ -6,7 +6,7 @@ import 'package:flutter_project/shared/globals.dart';
 abstract class PinCodeDataSource {
   String get storageKeyPinCode;
 
-  Future<Either<AppException, bool>> checkPin({required String pinCode});
+  Future<Either<AppException, bool>> checkPin(String pinCode);
   Future<Either<AppException, bool>> setCorrectPinCode(
       {required String newPinCode});
   Future<String> getCorrectPinCode();
@@ -22,7 +22,7 @@ class PinCodeLocalDataSource implements PinCodeDataSource {
   String get storageKeyPinCode => PIN_CODE_LOCAL_STORAGE_KEY;
 
   @override
-  Future<Either<AppException, bool>> checkPin({required String pinCode}) async {
+  Future<Either<AppException, bool>> checkPin(String pinCode) async {
     try {
       await Future.delayed(const Duration(milliseconds: 100));
       String correctPin = await getCorrectPinCode();
