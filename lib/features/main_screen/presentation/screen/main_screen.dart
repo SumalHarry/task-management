@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_project/features/main/presentation/widgets/main_app_bar_expanded_view.dart';
+import 'package:flutter_project/features/main_screen/presentation/widgets/main_app_bar_expanded_view.dart';
+import 'package:flutter_project/features/pin_code_editing/presentation/porviders/pin_code_editing_providers.dart';
+import 'package:flutter_project/features/pin_code_editing/presentation/porviders/state/pin_code_editing_state.dart';
+import 'package:flutter_project/routes/app_route.dart';
 import 'package:flutter_project/shared/domain/models/task/task_status.dart';
 import 'package:flutter_project/features/task/presentation/widgets/task_list.dart';
 import 'package:flutter_project/shared/theme/app_colors.dart';
@@ -94,9 +97,18 @@ class _MainScreenState extends ConsumerState<MainScreen>
                 surfaceTintColor: Colors.transparent,
                 actions: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      var notifier =
+                          ref.read(pinCodeEditingNotifierProvider.notifier);
+                      notifier.resetState();
+                      notifier.setupEditingState(
+                          PinCodeEditingConcreteState.confirmOldPin);
+                      AutoRouter.of(context).push(
+                        const PinCodeEditingRoute(),
+                      );
+                    },
                     icon: const Icon(
-                      Icons.notification_add,
+                      Icons.edit,
                       color: Color.fromARGB(255, 255, 157, 0),
                       size: 30.0,
                     ),

@@ -28,7 +28,6 @@ class PinCodeNotifier extends StateNotifier<PinCodeState> {
             state: PinCodeConcreteState.success,
             isLoading: false,
             isPinCorrect: true,
-            enteredPin: '',
           );
         } else {
           return state.copyWith(
@@ -42,7 +41,7 @@ class PinCodeNotifier extends StateNotifier<PinCodeState> {
     );
   }
 
-  Future<void> addPinNumber(int value) async {
+  void addPinNumber(int value) {
     if (state.enteredPin.length < PIN_LENGTH) {
       state = state.copyWith(
         state: PinCodeConcreteState.inProgress,
@@ -55,7 +54,7 @@ class PinCodeNotifier extends StateNotifier<PinCodeState> {
     }
   }
 
-  Future<void> removePinNumber() async {
+  void removePinNumber() {
     if (state.enteredPin.isNotEmpty) {
       state = state.copyWith(
         state: PinCodeConcreteState.inProgress,

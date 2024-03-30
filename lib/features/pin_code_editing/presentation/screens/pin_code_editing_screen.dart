@@ -1,37 +1,38 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_project/features/pin_code/presentation/porviders/pin_code_providers.dart';
 import 'package:flutter_project/features/pin_code/presentation/porviders/state/pin_code_state.dart';
 import 'package:flutter_project/features/pin_code/presentation/widgets/widget_pin_code.dart';
+import 'package:flutter_project/features/pin_code_editing/presentation/porviders/pin_code_editing_providers.dart';
+import 'package:flutter_project/features/pin_code_editing/presentation/porviders/state/pin_code_editing_state.dart';
 import 'package:flutter_project/shared/globals.dart';
 import 'package:flutter_project/shared/theme/app_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class PinCodeScreen extends ConsumerStatefulWidget {
-  static const routeName = '/pinCodeScreen';
-
-  const PinCodeScreen({super.key, this.onVerified});
-  final VoidCallback? onVerified;
+class PinCodeEditingScreen extends ConsumerStatefulWidget {
+  const PinCodeEditingScreen({
+    super.key,
+  });
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _PinCodeScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _PinCodeEditingScreenState();
 }
 
-class _PinCodeScreenState extends ConsumerState<PinCodeScreen> {
+class _PinCodeEditingScreenState extends ConsumerState<PinCodeEditingScreen> {
   final double buttonSize = 70.0;
 
   @override
   Widget build(BuildContext context) {
-    final notifier = ref.read(pinCodeNotifierProvider.notifier);
-    final state = ref.watch(pinCodeNotifierProvider);
+    final notifier = ref.read(pinCodeEditingNotifierProvider.notifier);
+    final state = ref.watch(pinCodeEditingNotifierProvider);
 
     ref.listen(
-      pinCodeNotifierProvider.select((value) => value),
+      pinCodeEditingNotifierProvider.select((value) => value),
       ((previous, next) {
-        if (next.state == PinCodeConcreteState.success) {
-          if (widget.onVerified != null) widget.onVerified!();
-          notifier.resetState();
+        if (next.state == PinCodeConcreteState.success &&
+            next.editingState == PinCodeEditingConcreteState.success) {
+          AutoRouter.of(context).pop();
         } else if (next.state == PinCodeConcreteState.failure) {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(next.message.toString())));
@@ -39,7 +40,39 @@ class _PinCodeScreenState extends ConsumerState<PinCodeScreen> {
       }),
     );
 
+    String title = state.editingState.title;
+    BoxDecoration decorationLinearGradient = BoxDecoration(
+      gradient: LinearGradient(
+        colors: [
+          AppColors.secondary,
+          Theme.of(context).primaryColor,
+        ],
+      ),
+    );
+
     return Scaffold(
+      appBar: AppBar(
+        foregroundColor: AppColors.white,
+        title: Text(
+          title,
+          style: const TextStyle(
+            fontSize: 26,
+            fontWeight: FontWeight.w600,
+            color: AppColors.white,
+          ),
+        ),
+        centerTitle: true,
+        flexibleSpace: DecoratedBox(
+          decoration: decorationLinearGradient,
+          child: FlexibleSpaceBar(
+            collapseMode: CollapseMode.parallax,
+            background: Container(
+              padding: const EdgeInsets.only(bottom: 25.0),
+              decoration: decorationLinearGradient,
+            ),
+          ),
+        ),
+      ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -53,17 +86,6 @@ class _PinCodeScreenState extends ConsumerState<PinCodeScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const SizedBox(),
-              const Center(
-                child: Text(
-                  'Security Pin',
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.white,
-                  ),
-                ),
-              ),
               const SizedBox(height: 50),
 
               /// pin code area
