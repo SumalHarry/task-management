@@ -33,8 +33,10 @@ class _PinCodeScreenState extends ConsumerState<PinCodeScreen> {
           if (widget.onVerified != null) widget.onVerified!();
           notifier.resetState();
         } else if (next.state == PinCodeConcreteState.failure) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(next.message.toString())));
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            content: Text(next.message.toString()),
+          ));
         }
       }),
     );
@@ -57,11 +59,10 @@ class _PinCodeScreenState extends ConsumerState<PinCodeScreen> {
               Center(
                 child: Text(
                   'Security Pin',
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.w600,
-                    color: Theme.of(context).colorScheme.surface,
-                  ),
+                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                        color: Theme.of(context).colorScheme.surface,
+                        fontWeight: FontWeight.w700,
+                      ),
                 ),
               ),
               const SizedBox(height: 50),

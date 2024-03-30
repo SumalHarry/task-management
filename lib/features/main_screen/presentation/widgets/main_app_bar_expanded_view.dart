@@ -15,22 +15,19 @@ class MainAppBarExpandedView extends ConsumerWidget {
             padding: const EdgeInsets.only(left: 25.0),
             child: Text(
               'What are you going to do today?',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.surface,
-                fontSize: 20.0,
-                fontWeight: FontWeight.w700,
-              ),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Theme.of(context).colorScheme.surface,
+                    fontWeight: FontWeight.w700,
+                  ),
             ),
           ),
           Padding(
             padding: EdgeInsets.only(left: 25.0),
             child: Text(
               'Let\'s get started!',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.surface,
-                fontSize: 15.0,
-                fontWeight: FontWeight.w400,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.surface,
+                  ),
             ),
           ),
         ],

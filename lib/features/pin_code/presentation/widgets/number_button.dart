@@ -30,10 +30,9 @@ class NumberButton extends ConsumerWidget {
           onPressed: () => onPressed?.call(number),
           child: Text(
             number.toString(),
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.surface,
-              fontSize: 24.0,
-            ),
+            style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.surface,
+                ),
           ),
         ),
       ),

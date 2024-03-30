@@ -57,12 +57,16 @@ class _TaskListState extends ConsumerState<TaskList> {
         //show Snackbar on failure
         if (next.state == TaskConcreteState.fetchedAllProducts) {
           if (next.message.isNotEmpty) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(next.message.toString())));
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+              content: Text(next.message.toString()),
+            ));
           }
         } else if (next.state == TaskConcreteState.failure) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(next.message.toString())));
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            content: Text(next.message.toString()),
+          ));
         }
       }),
     );
@@ -73,62 +77,68 @@ class _TaskListState extends ConsumerState<TaskList> {
             ? LazyLoadScrollView(
                 onEndOfPage: () => _loadMore(),
                 scrollOffset: widget.fetchingScrollOffset,
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(8),
-                  itemCount: itemCount,
-                  itemBuilder: (BuildContext context, int index) {
-                    if (index == groupedTaskKeys.length) {
-                      return const Center(
-                        child: Padding(
-                          padding: EdgeInsets.all(20.0),
-                          child: SizedBox(
-                            child: CircularProgressIndicator(),
-                          ),
-                        ),
-                      );
-                    }
-
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 10.0,
-                            left: 20.0,
-                            right: 20.0,
-                          ),
-                          child: Text(
-                            groupedTaskKeys[index],
-                            style: const TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    notifier.pullToRefreah();
+                  },
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(8),
+                    itemCount: itemCount,
+                    itemBuilder: (BuildContext context, int index) {
+                      if (index == groupedTaskKeys.length) {
+                        return const Center(
+                          child: Padding(
+                            padding: EdgeInsets.all(20.0),
+                            child: SizedBox(
+                              child: CircularProgressIndicator(),
                             ),
                           ),
-                        ),
-                        (groupedTasks.isEmpty)
-                            ? const Center(
-                                child: Text("No task available"),
-                              )
-                            : Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20.0),
-                                child: Column(
-                                  children: List.generate(
-                                    groupedTaskValues[index].length,
-                                    (indexItem) => AppDissMisssiable(
-                                      child: TaskListItem(
-                                        task: groupedTaskValues[index]
-                                            [indexItem],
+                        );
+                      }
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 10.0,
+                              left: 20.0,
+                              right: 20.0,
+                            ),
+                            child: Text(
+                              groupedTaskKeys[index],
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          (groupedTasks.isEmpty)
+                              ? const Center(
+                                  child: Text("No task available"),
+                                )
+                              : Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20.0),
+                                  child: Column(
+                                    children: List.generate(
+                                      groupedTaskValues[index].length,
+                                      (indexItem) => AppDissMisssiable(
+                                        child: TaskListItem(
+                                          task: groupedTaskValues[index]
+                                              [indexItem],
+                                        ),
+                                        onDelete: () => _deleteTask(
+                                            groupedTaskValues[index]
+                                                [indexItem]),
                                       ),
-                                      onDelete: () => _deleteTask(
-                                          groupedTaskValues[index][indexItem]),
                                     ),
                                   ),
                                 ),
-                              ),
-                      ],
-                    );
-                  },
+                        ],
+                      );
+                    },
+                  ),
                 ),
               )
             : Center(

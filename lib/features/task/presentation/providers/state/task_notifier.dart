@@ -44,7 +44,7 @@ class TaskNotifier extends StateNotifier<TaskState> {
     } else {
       state = state.copyWith(
         state: TaskConcreteState.fetchedAllProducts,
-        message: 'No more products available',
+        message: 'No more task',
         isLoading: false,
       );
     }
@@ -91,10 +91,6 @@ class TaskNotifier extends StateNotifier<TaskState> {
     });
   }
 
-  void resetState() {
-    state = TaskState.initial(taskStatus: taskStatus);
-  }
-
   Map<String, List<Task>> groupTasksByCreateAtString(List<Task> tasks) {
     Map<String, List<Task>> groupedTasks = {};
     for (Task task in tasks) {
@@ -106,5 +102,14 @@ class TaskNotifier extends StateNotifier<TaskState> {
       }
     }
     return groupedTasks;
+  }
+
+  void pullToRefreah() {
+    resetState();
+    fetchTask();
+  }
+
+  void resetState() {
+    state = TaskState.initial(taskStatus: taskStatus);
   }
 }

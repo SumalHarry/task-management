@@ -45,11 +45,10 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         child: Center(
           child: Text(
             'Splash Screen',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.surface,
-              fontWeight: FontWeight.w600,
-              fontSize: 25.0,
-            ),
+            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.surface,
+                  fontWeight: FontWeight.w700,
+                ),
           ),
         ),
       ),

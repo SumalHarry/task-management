@@ -83,11 +83,10 @@ class _MainScreenState extends ConsumerState<MainScreen>
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Text(
                     'Hi, User',
-                    style: TextStyle(
-                      fontSize: 25.0,
-                      color: Theme.of(context).colorScheme.surface,
-                      fontWeight: FontWeight.w700,
-                    ),
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.surface,
+                          fontWeight: FontWeight.w700,
+                        ),
                   ),
                 ),
                 elevation: 10,
@@ -96,21 +95,24 @@ class _MainScreenState extends ConsumerState<MainScreen>
                 pinned: true,
                 surfaceTintColor: Colors.transparent,
                 actions: [
-                  IconButton(
-                    onPressed: () {
-                      var notifier =
-                          ref.read(pinCodeEditingNotifierProvider.notifier);
-                      notifier.resetState();
-                      notifier.setupEditingState(
-                          PinCodeEditingConcreteState.confirmOldPin);
-                      AutoRouter.of(context).push(
-                        const PinCodeEditingRoute(),
-                      );
-                    },
-                    icon: Icon(
-                      Icons.edit,
-                      color: Theme.of(context).colorScheme.surface,
-                      size: 30.0,
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: IconButton(
+                      onPressed: () {
+                        var notifier =
+                            ref.read(pinCodeEditingNotifierProvider.notifier);
+                        notifier.resetState();
+                        notifier.setupEditingState(
+                            PinCodeEditingConcreteState.confirmOldPin);
+                        AutoRouter.of(context).push(
+                          const PinCodeEditingRoute(),
+                        );
+                      },
+                      icon: Icon(
+                        Icons.edit,
+                        color: Theme.of(context).colorScheme.surface,
+                        size: 30.0,
+                      ),
                     ),
                   ),
                 ],

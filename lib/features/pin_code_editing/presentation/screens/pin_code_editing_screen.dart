@@ -35,8 +35,10 @@ class _PinCodeEditingScreenState extends ConsumerState<PinCodeEditingScreen> {
             next.editingState == PinCodeEditingConcreteState.success) {
           AutoRouter.of(context).pop();
         } else if (next.state == PinCodeConcreteState.failure) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(next.message.toString())));
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            content: Text(next.message.toString()),
+          ));
         }
       }),
     );
@@ -57,11 +59,9 @@ class _PinCodeEditingScreenState extends ConsumerState<PinCodeEditingScreen> {
           foregroundColor: Theme.of(context).colorScheme.surface,
           title: Text(
             title,
-            style: TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.w600,
-              color: Theme.of(context).colorScheme.surface,
-            ),
+            style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.surface,
+                ),
           ),
           centerTitle: true,
           flexibleSpace: DecoratedBox(
