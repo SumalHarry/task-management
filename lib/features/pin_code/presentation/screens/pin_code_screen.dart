@@ -28,6 +28,7 @@ class _PinCodeScreenState extends ConsumerState<PinCodeScreen> {
     ref.listen(
       pinCodeNotifierProvider.select((value) => value),
       ((previous, next) {
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
         if (next.state == PinCodeConcreteState.success) {
           if (widget.onVerified != null) widget.onVerified!();
           notifier.resetState();
