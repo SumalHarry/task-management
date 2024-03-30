@@ -2,11 +2,13 @@ import 'dart:io';
 
 final kTestMode = Platform.environment.containsKey('FLUTTER_TEST');
 
+const String DEFAULT_CORRECT_PIN = "123456";
+const int IN_ACTIVITY_DURATION = 10;
+
 const int PIN_LENGTH = 6;
 const int ITEMS_PER_PAGE = 10;
 const String CREATE_AT = "createdAt";
-const int IN_ACTIVITY_DURATION = 10;
-const String DEFAULT_CORRECT_PIN = "123456";
+const double HORIZON_PADDING = 20.0;
 
 const String APP_THEME_STORAGE_KEY = 'APP_THEME_STORAGE_KEY';
 const String PIN_CODE_LOCAL_STORAGE_KEY = 'PIN_CODE_LOCAL_STORAGE_KEY';

@@ -4,7 +4,6 @@ import 'package:flutter_project/features/pin_code/presentation/porviders/pin_cod
 import 'package:flutter_project/features/pin_code/presentation/porviders/state/pin_code_state.dart';
 import 'package:flutter_project/features/pin_code/presentation/widgets/widget_pin_code.dart';
 import 'package:flutter_project/shared/globals.dart';
-import 'package:flutter_project/shared/theme/app_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()

@@ -22,7 +22,7 @@ class MainAppBarExpandedView extends ConsumerWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 25.0),
+            padding: const EdgeInsets.only(left: 25.0),
             child: Text(
               'Let\'s get started!',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(

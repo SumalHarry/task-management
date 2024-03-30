@@ -5,9 +5,9 @@ import 'package:flutter_project/shared/globals.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PinCodeEditingNotifier extends StateNotifier<PinCodeEditingState> {
-  PinCodeEditingNotifier({
-    required this.pinCodeRepository,
-  }) : super(const PinCodeEditingState.initial());
+  PinCodeEditingNotifier(
+    this.pinCodeRepository,
+  ) : super(const PinCodeEditingState.initial());
 
   final PinCodeRepository pinCodeRepository;
 

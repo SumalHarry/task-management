@@ -10,6 +10,6 @@ final pinCodeEditingNotifierProvider =
       ref.watch(pinCodeRepositoryProvider);
 
   return PinCodeEditingNotifier(
-    pinCodeRepository: pinCodeRepository,
+    pinCodeRepository,
   );
 });

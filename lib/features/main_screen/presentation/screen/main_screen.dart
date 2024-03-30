@@ -6,7 +6,7 @@ import 'package:flutter_project/features/pin_code_editing/presentation/porviders
 import 'package:flutter_project/routes/app_route.dart';
 import 'package:flutter_project/shared/domain/models/task/task_status.dart';
 import 'package:flutter_project/features/task/presentation/widgets/task_list.dart';
-import 'package:flutter_project/shared/theme/app_colors.dart';
+import 'package:flutter_project/shared/globals.dart';
 import 'package:flutter_project/shared/widgets/app_activity/presentation/widgets/app_activity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -241,7 +241,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
         top: false,
         bottom: false,
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: HORIZON_PADDING),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.grey.shade200,
