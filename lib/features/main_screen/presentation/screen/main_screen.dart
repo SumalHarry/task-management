@@ -50,6 +50,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
   _handleTabSelection() {
     if (_tabController.indexIsChanging) {
       _scrollToTop();
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
     }
   }
 

@@ -59,12 +59,14 @@ class _TaskListState extends ConsumerState<TaskList> {
         if (next.state == TaskConcreteState.fetchedAllProducts) {
           if (next.message.isNotEmpty) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              duration: const Duration(seconds: 2),
               backgroundColor: Theme.of(context).colorScheme.secondary,
               content: Text(next.message.toString()),
             ));
           }
         } else if (next.state == TaskConcreteState.failure) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            duration: const Duration(seconds: 2),
             backgroundColor: Theme.of(context).colorScheme.secondary,
             content: Text(next.message.toString()),
           ));

@@ -5,7 +5,6 @@ import 'package:flutter_project/features/pin_code/presentation/widgets/widget_pi
 import 'package:flutter_project/features/pin_code_editing/presentation/porviders/pin_code_editing_providers.dart';
 import 'package:flutter_project/features/pin_code_editing/presentation/porviders/state/pin_code_editing_state.dart';
 import 'package:flutter_project/shared/globals.dart';
-import 'package:flutter_project/shared/theme/app_colors.dart';
 import 'package:flutter_project/shared/widgets/app_activity/presentation/widgets/app_activity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -37,6 +36,7 @@ class _PinCodeEditingScreenState extends ConsumerState<PinCodeEditingScreen> {
           AutoRouter.of(context).pop();
         } else if (next.state == PinCodeConcreteState.failure) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            duration: const Duration(seconds: 2),
             backgroundColor: Theme.of(context).colorScheme.secondary,
             content: Text(next.message.toString()),
           ));

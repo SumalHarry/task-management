@@ -34,6 +34,7 @@ class _PinCodeScreenState extends ConsumerState<PinCodeScreen> {
           notifier.resetState();
         } else if (next.state == PinCodeConcreteState.failure) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            duration: const Duration(seconds: 2),
             backgroundColor: Theme.of(context).colorScheme.secondary,
             content: Text(next.message.toString()),
           ));
