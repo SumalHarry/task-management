@@ -65,6 +65,15 @@ Widgets notify the events and listen to the states emitted from the `StateNotifi
 Describes the logic processing required for the presentation.
 Communicates directly with the `Providers` from the domain layer.
 
+
+#### Configration
+
+Configration is keep at shared/globals.dart
+
+  - `DEFAULT_CORRECT_PIN` use for set defulat current passcode it's be "123456".
+  - `IN_ACTIVITY_DURATION` use for countdown time when user is inactive.
+  - `ITEMS_PER_PAGE` use for confiuration of load amount items per page.
+
 ### Testing
 
 The `test` folder mirrors the `lib` folder in addition to some test utilities.
