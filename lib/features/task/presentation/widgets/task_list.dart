@@ -8,6 +8,7 @@ import 'package:flutter_project/features/task/presentation/providers/task_state_
 import 'package:flutter_project/features/task/presentation/widgets/task_list_item.dart';
 import 'package:flutter_project/shared/globals.dart';
 import 'package:flutter_project/shared/widgets/app_dismissible.dart';
+import 'package:flutter_project/shared/widgets/app_snack_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
@@ -58,18 +59,10 @@ class _TaskListState extends ConsumerState<TaskList> {
         //show Snackbar on failure
         if (next.state == TaskConcreteState.fetchedAllProducts) {
           if (next.message.isNotEmpty) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              duration: const Duration(seconds: 2),
-              backgroundColor: Theme.of(context).colorScheme.secondary,
-              content: Text(next.message.toString()),
-            ));
+            AppSnackBar.show(context, next.message.toString());
           }
         } else if (next.state == TaskConcreteState.failure) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            duration: const Duration(seconds: 2),
-            backgroundColor: Theme.of(context).colorScheme.secondary,
-            content: Text(next.message.toString()),
-          ));
+          AppSnackBar.show(context, next.message.toString());
         }
       }),
     );

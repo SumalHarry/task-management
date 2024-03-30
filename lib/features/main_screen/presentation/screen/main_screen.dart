@@ -8,6 +8,7 @@ import 'package:flutter_project/shared/domain/models/task/task_status.dart';
 import 'package:flutter_project/features/task/presentation/widgets/task_list.dart';
 import 'package:flutter_project/shared/globals.dart';
 import 'package:flutter_project/shared/widgets/app_activity/presentation/widgets/app_activity.dart';
+import 'package:flutter_project/shared/widgets/app_snack_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
@@ -50,7 +51,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
   _handleTabSelection() {
     if (_tabController.indexIsChanging) {
       _scrollToTop();
-      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      AppSnackBar.hide(context);
     }
   }
 

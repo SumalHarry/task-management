@@ -6,6 +6,7 @@ import 'package:flutter_project/features/pin_code_editing/presentation/porviders
 import 'package:flutter_project/features/pin_code_editing/presentation/porviders/state/pin_code_editing_state.dart';
 import 'package:flutter_project/shared/globals.dart';
 import 'package:flutter_project/shared/widgets/app_activity/presentation/widgets/app_activity.dart';
+import 'package:flutter_project/shared/widgets/app_snack_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
@@ -30,16 +31,12 @@ class _PinCodeEditingScreenState extends ConsumerState<PinCodeEditingScreen> {
     ref.listen(
       pinCodeEditingNotifierProvider.select((value) => value),
       ((previous, next) {
-        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        AppSnackBar.hide(context);
         if (next.state == PinCodeConcreteState.success &&
             next.editingState == PinCodeEditingConcreteState.success) {
           AutoRouter.of(context).pop();
         } else if (next.state == PinCodeConcreteState.failure) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            duration: const Duration(seconds: 2),
-            backgroundColor: Theme.of(context).colorScheme.secondary,
-            content: Text(next.message.toString()),
-          ));
+          AppSnackBar.show(context, next.message.toString());
         }
       }),
     );

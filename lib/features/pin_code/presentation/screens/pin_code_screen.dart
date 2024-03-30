@@ -4,6 +4,7 @@ import 'package:flutter_project/features/pin_code/presentation/porviders/pin_cod
 import 'package:flutter_project/features/pin_code/presentation/porviders/state/pin_code_state.dart';
 import 'package:flutter_project/features/pin_code/presentation/widgets/widget_pin_code.dart';
 import 'package:flutter_project/shared/globals.dart';
+import 'package:flutter_project/shared/widgets/app_snack_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
@@ -28,16 +29,12 @@ class _PinCodeScreenState extends ConsumerState<PinCodeScreen> {
     ref.listen(
       pinCodeNotifierProvider.select((value) => value),
       ((previous, next) {
-        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        AppSnackBar.hide(context);
         if (next.state == PinCodeConcreteState.success) {
           if (widget.onVerified != null) widget.onVerified!();
           notifier.resetState();
         } else if (next.state == PinCodeConcreteState.failure) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            duration: const Duration(seconds: 2),
-            backgroundColor: Theme.of(context).colorScheme.secondary,
-            content: Text(next.message.toString()),
-          ));
+          AppSnackBar.show(context, next.message.toString());
         }
       }),
     );
