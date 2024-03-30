@@ -12,9 +12,9 @@ extension PinCodeEditingConcreteStateGetter on PinCodeEditingConcreteState {
   String get title {
     switch (this) {
       case PinCodeEditingConcreteState.confirmOldPin:
-        return 'Confirm Old pin code';
+        return 'Confirm current pin code';
       case PinCodeEditingConcreteState.newPin:
-        return 'Enter New pin code';
+        return 'Enter new pin code';
       case PinCodeEditingConcreteState.confirmNewPin:
         return 'Confirm new pin code';
       default:
