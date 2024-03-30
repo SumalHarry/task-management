@@ -31,6 +31,7 @@ class _PinCodeEditingScreenState extends ConsumerState<PinCodeEditingScreen> {
     ref.listen(
       pinCodeEditingNotifierProvider.select((value) => value),
       ((previous, next) {
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
         if (next.state == PinCodeConcreteState.success &&
             next.editingState == PinCodeEditingConcreteState.success) {
           AutoRouter.of(context).pop();

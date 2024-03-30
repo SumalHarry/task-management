@@ -2,7 +2,7 @@ import 'package:flutter_project/features/pin_code/presentation/porviders/state/p
 
 enum PinCodeEditingConcreteState {
   initial,
-  confirmOldPin,
+  confirmCurrentPin,
   newPin,
   confirmNewPin,
   success,
@@ -11,7 +11,7 @@ enum PinCodeEditingConcreteState {
 extension PinCodeEditingConcreteStateGetter on PinCodeEditingConcreteState {
   String get title {
     switch (this) {
-      case PinCodeEditingConcreteState.confirmOldPin:
+      case PinCodeEditingConcreteState.confirmCurrentPin:
         return 'Confirm current pin code';
       case PinCodeEditingConcreteState.newPin:
         return 'Enter new pin code';

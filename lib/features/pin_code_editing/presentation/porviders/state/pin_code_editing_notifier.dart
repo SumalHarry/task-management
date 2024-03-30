@@ -13,7 +13,7 @@ class PinCodeEditingNotifier extends StateNotifier<PinCodeEditingState> {
 
   Future<void> checkPin(String pinCode) async {
     switch (state.editingState) {
-      case PinCodeEditingConcreteState.confirmOldPin:
+      case PinCodeEditingConcreteState.confirmCurrentPin:
         _confirmOldPin(pinCode);
       case PinCodeEditingConcreteState.newPin:
         _newPin(pinCode);
@@ -49,7 +49,7 @@ class PinCodeEditingNotifier extends StateNotifier<PinCodeEditingState> {
           return state.copyWith(
             state: PinCodeConcreteState.failure,
             isLoading: false,
-            message: 'Pin is match',
+            message: 'Pin is incorrect',
             enteredPin: '',
           );
         }
@@ -90,7 +90,7 @@ class PinCodeEditingNotifier extends StateNotifier<PinCodeEditingState> {
       state = state.copyWith(
         state: PinCodeConcreteState.failure,
         isLoading: false,
-        message: 'Pin is not match',
+        message: 'Confirm pin is not match',
         enteredPin: '',
       );
     }

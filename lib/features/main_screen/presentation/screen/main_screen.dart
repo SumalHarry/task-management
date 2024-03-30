@@ -103,7 +103,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
                             ref.read(pinCodeEditingNotifierProvider.notifier);
                         notifier.resetState();
                         notifier.setupEditingState(
-                            PinCodeEditingConcreteState.confirmOldPin);
+                            PinCodeEditingConcreteState.confirmCurrentPin);
                         AutoRouter.of(context).push(
                           const PinCodeEditingRoute(),
                         );
