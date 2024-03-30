@@ -6,17 +6,17 @@ class MainAppBarExpandedView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const SafeArea(
+    return SafeArea(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(left: 25.0),
+            padding: const EdgeInsets.only(left: 25.0),
             child: Text(
               'What are you going to do today?',
               style: TextStyle(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surface,
                 fontSize: 20.0,
                 fontWeight: FontWeight.w700,
               ),
@@ -27,7 +27,7 @@ class MainAppBarExpandedView extends ConsumerWidget {
             child: Text(
               'Let\'s get started!',
               style: TextStyle(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surface,
                 fontSize: 15.0,
                 fontWeight: FontWeight.w400,
               ),

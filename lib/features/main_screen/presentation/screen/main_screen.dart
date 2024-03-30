@@ -66,8 +66,8 @@ class _MainScreenState extends ConsumerState<MainScreen>
     BoxDecoration decorationLinearGradient = BoxDecoration(
       gradient: LinearGradient(
         colors: [
-          AppColors.secondary,
-          Theme.of(context).primaryColor,
+          Theme.of(context).colorScheme.secondary,
+          Theme.of(context).colorScheme.primary,
         ],
       ),
     );
@@ -81,11 +81,11 @@ class _MainScreenState extends ConsumerState<MainScreen>
               SliverAppBar(
                 title: Container(
                   padding: const EdgeInsets.only(left: 10.0),
-                  child: const Text(
+                  child: Text(
                     'Hi, User',
                     style: TextStyle(
                       fontSize: 25.0,
-                      color: AppColors.white,
+                      color: Theme.of(context).colorScheme.surface,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -107,9 +107,9 @@ class _MainScreenState extends ConsumerState<MainScreen>
                         const PinCodeEditingRoute(),
                       );
                     },
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.edit,
-                      color: Color.fromARGB(255, 255, 157, 0),
+                      color: Theme.of(context).colorScheme.surface,
                       size: 30.0,
                     ),
                   ),
@@ -151,8 +151,8 @@ class _MainScreenState extends ConsumerState<MainScreen>
                       borderRadius: BorderRadius.circular(25.0),
                       gradient: LinearGradient(
                         colors: [
-                          AppColors.secondary,
-                          Theme.of(context).primaryColor,
+                          Theme.of(context).colorScheme.secondary,
+                          Theme.of(context).colorScheme.primary,
                         ],
                       ),
                     ),
@@ -187,8 +187,8 @@ class _MainScreenState extends ConsumerState<MainScreen>
             shape: BoxShape.circle,
             gradient: LinearGradient(
               colors: [
-                AppColors.secondary,
-                Theme.of(context).primaryColor,
+                Theme.of(context).colorScheme.secondary,
+                Theme.of(context).colorScheme.primary,
               ],
             ),
           ),
@@ -224,8 +224,8 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                AppColors.secondary,
-                Theme.of(context).primaryColor,
+                Theme.of(context).colorScheme.secondary,
+                Theme.of(context).colorScheme.primary,
               ],
             ),
             borderRadius: const BorderRadius.only(

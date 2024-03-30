@@ -45,8 +45,8 @@ class _PinCodeEditingScreenState extends ConsumerState<PinCodeEditingScreen> {
     BoxDecoration decorationLinearGradient = BoxDecoration(
       gradient: LinearGradient(
         colors: [
-          AppColors.secondary,
-          Theme.of(context).primaryColor,
+          Theme.of(context).colorScheme.secondary,
+          Theme.of(context).colorScheme.primary,
         ],
       ),
     );
@@ -54,13 +54,13 @@ class _PinCodeEditingScreenState extends ConsumerState<PinCodeEditingScreen> {
     return AppActivity(
       child: Scaffold(
         appBar: AppBar(
-          foregroundColor: AppColors.white,
+          foregroundColor: Theme.of(context).colorScheme.surface,
           title: Text(
             title,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 26,
               fontWeight: FontWeight.w600,
-              color: AppColors.white,
+              color: Theme.of(context).colorScheme.surface,
             ),
           ),
           centerTitle: true,
@@ -79,8 +79,8 @@ class _PinCodeEditingScreenState extends ConsumerState<PinCodeEditingScreen> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                AppColors.secondary,
-                Theme.of(context).primaryColor,
+                Theme.of(context).colorScheme.secondary,
+                Theme.of(context).colorScheme.primary,
               ],
             ),
           ),
@@ -104,7 +104,7 @@ class _PinCodeEditingScreenState extends ConsumerState<PinCodeEditingScreen> {
                           shape: BoxShape.circle,
                           color: index < state.enteredPin.length
                               ? Theme.of(context).primaryColor
-                              : Colors.white24,
+                              : Theme.of(context).colorScheme.outline,
                         ),
                       );
                     },

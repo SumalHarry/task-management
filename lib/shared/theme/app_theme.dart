@@ -43,9 +43,10 @@ class AppTheme {
       primaryColor: AppColors.primary,
       colorScheme: const ColorScheme.dark(
         primary: AppColors.primary,
-        secondary: AppColors.lightGrey,
+        secondary: AppColors.secondary,
         error: AppColors.error,
         background: AppColors.black,
+        outline: AppColors.lightGrey,
       ),
       // backgroundColor: AppColors.black,
       scaffoldBackgroundColor: AppColors.black,
@@ -68,8 +69,9 @@ class AppTheme {
       primaryTextTheme: TextThemes.primaryTextTheme,
       colorScheme: const ColorScheme.light(
         primary: AppColors.primary,
-        secondary: AppColors.lightGrey,
+        secondary: AppColors.secondary,
         error: AppColors.error,
+        outline: AppColors.lightGrey,
       ),
       appBarTheme: const AppBarTheme(
         elevation: 0,

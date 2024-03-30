@@ -19,13 +19,16 @@ class AppDissMisssiable extends ConsumerWidget {
       direction: DismissDirection.endToStart,
       background: Container(
         alignment: Alignment.centerRight,
-        padding: EdgeInsets.all(16.0),
-        margin: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8),
+        padding: const EdgeInsets.all(16.0),
+        margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8),
         decoration: BoxDecoration(
-          color: Colors.red,
+          color: Theme.of(context).colorScheme.error,
           borderRadius: BorderRadius.circular(10.0),
         ),
-        child: Icon(Icons.delete, color: Colors.white),
+        child: Icon(
+          Icons.delete,
+          color: Theme.of(context).colorScheme.surface,
+        ),
       ),
       onDismissed: (DismissDirection direction) {},
       confirmDismiss: (DismissDirection direction) async {

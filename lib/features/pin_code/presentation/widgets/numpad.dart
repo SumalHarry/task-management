@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/features/pin_code/presentation/widgets/widget_pin_code.dart';
-import 'package:flutter_project/shared/theme/app_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Numpad extends ConsumerWidget {
@@ -50,9 +49,9 @@ class Numpad extends ConsumerWidget {
               ),
               TextButton(
                 onPressed: onPressedDelete,
-                child: const Icon(
+                child: Icon(
                   Icons.backspace,
-                  color: AppColors.white,
+                  color: Theme.of(context).colorScheme.surface,
                   size: 24,
                 ),
               ),

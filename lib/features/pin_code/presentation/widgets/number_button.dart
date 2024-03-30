@@ -21,17 +21,17 @@ class NumberButton extends ConsumerWidget {
       child: Container(
         width: buttonSize,
         height: buttonSize,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: Colors.white24,
+          color: Theme.of(context).colorScheme.outline,
         ),
         child: MaterialButton(
           shape: const CircleBorder(),
           onPressed: () => onPressed?.call(number),
           child: Text(
             number.toString(),
-            style: const TextStyle(
-              color: AppColors.white,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.surface,
               fontSize: 24.0,
             ),
           ),

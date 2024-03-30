@@ -37,16 +37,16 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              AppColors.secondary,
-              Theme.of(context).primaryColor,
+              Theme.of(context).colorScheme.secondary,
+              Theme.of(context).colorScheme.primary,
             ],
           ),
         ),
-        child: const Center(
+        child: Center(
           child: Text(
             'Splash Screen',
             style: TextStyle(
-              color: AppColors.white,
+              color: Theme.of(context).colorScheme.surface,
               fontWeight: FontWeight.w600,
               fontSize: 25.0,
             ),
