@@ -25,6 +25,7 @@ class NumberButton extends ConsumerWidget {
           color: Theme.of(context).colorScheme.outline,
         ),
         child: MaterialButton(
+          key: Key('numberButton$number'),
           shape: const CircleBorder(),
           onPressed: () => onPressed?.call(number),
           child: Text(
