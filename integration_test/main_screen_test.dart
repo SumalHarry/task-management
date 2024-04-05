@@ -7,7 +7,8 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('end-to-end test', () {
-    testWidgets('tap on the pin code', (WidgetTester tester) async {
+    testWidgets('verify pin code wiht correct pin',
+        (WidgetTester tester) async {
       app.main();
       await tester.pumpAndSettle();
       await Future.delayed(const Duration(seconds: 2));
@@ -22,6 +23,24 @@ void main() {
       await Future.delayed(const Duration(seconds: 2));
       await tester.pumpAndSettle();
       expect(find.text('Hi, User'), findsOneWidget);
+    });
+
+    testWidgets('verify pin code wiht incorrect pin',
+        (WidgetTester tester) async {
+      app.main();
+      await tester.pumpAndSettle();
+      await Future.delayed(const Duration(seconds: 2));
+      await tester.pumpAndSettle();
+
+      for (var i = 1; i <= 6; i++) {
+        final numberButtonKey = find.byKey(const Key('numberButton1'));
+        await tester.tap(numberButtonKey);
+        await Future.delayed(const Duration(milliseconds: 500));
+      }
+
+      await Future.delayed(const Duration(seconds: 2));
+      await tester.pumpAndSettle();
+      expect(find.text('Pin is incorrect'), findsOneWidget);
     });
   });
 }
