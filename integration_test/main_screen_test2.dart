@@ -6,8 +6,8 @@ import 'package:flutter_project/main.dart' as app;
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  group('end-to-end test', () {
-    testWidgets('verify pin code with correct pin',
+  group('end-to-end test2', () {
+    testWidgets('verify pin code with incorrect pin',
         (WidgetTester tester) async {
       app.main();
       await tester.pumpAndSettle();
@@ -15,14 +15,14 @@ void main() {
       await tester.pumpAndSettle();
 
       for (var i = 1; i <= 6; i++) {
-        final numberButtonKey = find.byKey(Key('numberButton$i'));
+        final numberButtonKey = find.byKey(const Key('numberButton1'));
         await tester.tap(numberButtonKey);
         await Future.delayed(const Duration(milliseconds: 500));
       }
 
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 1));
       await tester.pumpAndSettle();
-      expect(find.text('Hi, User'), findsOneWidget);
+      expect(find.text('Pin is incorrect'), findsOneWidget);
     });
   });
 }
